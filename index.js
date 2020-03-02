@@ -52,8 +52,10 @@ function adicionarAluno(nome){
 
         alunosDaEscola.push({nome: nome,notas:[],cursos:[],faltas:0});
         console.log(`O aluno ${nome} foi inserido com sucesso`);
+        return true;
 }
    
+
 function listarAlunos(){
     /*Com essa função o usuário poderá ver todos os alunos cadastrados atualmente no sistema. 
     Vale dizer que As informações deverão ser exibidas em um formato amigável.*/
@@ -74,34 +76,33 @@ function listarAlunos(){
         }
 }
 
-listarAlunos();
 
 function buscarAluno(nome){
     /* Por meio dessa função, podemos pesquisar um aluno por nome na lista de aluno. Ela deverá exibir um feedback, tanto para quando encontrar o aluno, tanto quando não encontrar. E deverá devolver um aluno em seu retorno. */
     
 
-    for (let i = 0; i < alunosDaEscola.length; i++) {
-        var nomeDoAluno = alunosDaEscola[i].nome;
-        var indiceDoAluno = nomeDoAluno.indexOf(nome);
-    }
-    
-    console.log(nomeDoAluno, indiceDoAluno);
+        for (let i = 0; i < alunosDaEscola.length; i++) {
 
-    if (indiceDoAluno >= 0) {
-        console.log(`O aluno ${nome} está matriculado na escola`);
-    } else {
+            if (alunosDaEscola[i].nome == nome) {
+                console.log(`O aluno ${nome} está matriculado na escola`);
+                return i;
+            }
+        }
+
         console.log(`O aluno ${nome} não está matriculado na escola`);
-    }
-    return alunosDaEscola[indiceDoAluno];
 }
 
-buscarAluno("Bruno");
 
-    function matricularAluno(aluno/*:object*/, curso /*:string*/){
+    function matricularAluno(aluno, curso){
     /* Essa funcionalidade irá permitir, cadastrar um aluno em um curso. 
     Essa função só poderá ser executada em um aluno já devidamente cadastrado no sistema, e deverá armazenar a data atual no momento da matricula
     Lembre-se de exibir o feedback para o usuário. */
+        let alunoMatriculado = buscarAluno(aluno);
+        if (alunoMatriculado >= 0) {
+            alunosDaEscola[alunoMatriculado].cursos.push({nomeDoCurso:curso,dataMatricula:new Date,});
+        }
    }
+
     function aplicarFalta(aluno/*:object*/){
     /*
      Ao receber um aluno devidamente cadastrado em nossa lista. Você deverá incrementar uma falta ao aluno. Você deverá dar um feedback ao concluir a tarefa. Só poderá aplicar falta em aluno se o mesmo tiver matriculado em um curso.
