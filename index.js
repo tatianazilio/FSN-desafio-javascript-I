@@ -97,22 +97,29 @@ function buscarAluno(nome){
     /* Essa funcionalidade irá permitir, cadastrar um aluno em um curso. 
     Essa função só poderá ser executada em um aluno já devidamente cadastrado no sistema, e deverá armazenar a data atual no momento da matricula
     Lembre-se de exibir o feedback para o usuário. */
-        let alunoMatriculado = buscarAluno(aluno);
-        if (alunoMatriculado >= 0) {
-            alunosDaEscola[alunoMatriculado].cursos.push({nomeDoCurso:curso,dataMatricula:new Date,});
+        let alunoAEditar = buscarAluno(aluno);
+        if (alunoAEditar >= 0) {
+            alunosDaEscola[alunoAEditar].cursos.push({nomeDoCurso:curso,dataMatricula:new Date,});
+            console.log(`O aluno ${aluno} foi matriculado no curso ${curso}`);
         }
    }
 
-    function aplicarFalta(aluno/*:object*/){
+    function aplicarFalta(aluno){
     /*
      Ao receber um aluno devidamente cadastrado em nossa lista. Você deverá incrementar uma falta ao aluno. Você deverá dar um feedback ao concluir a tarefa. Só poderá aplicar falta em aluno se o mesmo tiver matriculado em um curso.
     */
+        let alunoAEditar = buscarAluno(aluno);
+        if (alunoAEditar >= 0) {
+            alunosDaEscola[alunoAEditar].faltas++;
+            console.log(`Falta adicionada ao registro do aluno ${aluno}`);
+        }
     }
     
     function aplicarNota(aluno/*:object*/){
     /*
      Ao receber um aluno devidamente cadastrado em nossa lista. Você deverá adicionar uma nota ao aluno na sua lista de notas. Você deverá dar um feedback ao concluir a tarefa. Só poderá aplicar nota em aluno se o mesmo tiver matriculado em um curso.
     */
+        
    }
    
      function aprovarAluno(aluno/*:object*/){
