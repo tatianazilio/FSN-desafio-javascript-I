@@ -115,16 +115,34 @@ function buscarAluno(nome){
         }
     }
     
-    function aplicarNota(aluno/*:object*/){
+    function aplicarNota(aluno, nota){
     /*
      Ao receber um aluno devidamente cadastrado em nossa lista. Você deverá adicionar uma nota ao aluno na sua lista de notas. Você deverá dar um feedback ao concluir a tarefa. Só poderá aplicar nota em aluno se o mesmo tiver matriculado em um curso.
     */
-        
+        let alunoAEditar = buscarAluno(aluno);
+        if (alunoAEditar >= 0) {
+            alunosDaEscola[alunoAEditar].notas.push(nota);
+            console.log(`Nota ${nota} adicionada ao registro do aluno ${aluno}`);
+        }
    }
    
-     function aprovarAluno(aluno/*:object*/){
+     function aprovarAluno(aluno){
      /* 
      Ao receber um aluno devidamente cadastrado em nossa lista, deverá dizer se o mesmo está aprovado ou não. Os critérios de aprovação são: ter no máximo 3 faltas e média 7 em notas.
      Só o aluno só poderá ser aprovado se o mesmo tiver matriculado em um curso.
      */
-     }
+        let indice = buscarAluno(aluno);
+        if (indice >= 0) {
+            let alunoAEditar = alunosDaEscola[indice];
+
+            let mediaDoAluno = (alunoAEditar.notas.reduce((soma, nota) => soma + nota, 0)
+            ) / alunoAEditar.notas.length;
+
+
+            if(alunoAEditar.faltas <= 3 && mediaDoAluno >= 7 && alunoAEditar.cursos.length >= 1) {
+                console.log(`O aluno ${aluno} foi aprovado.`);
+            } else {
+                console.log(`O aluno ${aluno} foi reprovado.`);
+            }
+        }
+    }
